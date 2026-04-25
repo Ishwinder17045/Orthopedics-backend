@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database.connection import engine
 from models.base import Base
+from models import base
 from models.doctor import Doctor
 from models.service import Service
 from models.appointment import Appointment
@@ -36,7 +37,7 @@ app.include_router(testimonials.router)
 app.include_router(news.router)
 app.include_router(auth.router)
 
-Base.metadata.create_all(bind=engine)
+base.Base.metadata.create_all(bind=engine)
 seed_initial_data()
 
 @app.get("/")
